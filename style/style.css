@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.clock {
+    width: 200px;
+    height: 200px;
+    border: 2px solid #333;
+    background:url('imgonlinecomuaCompressToSizeOmNATjUMFKw-300x300.jpg');
+    background-repeat: no-repeat;
+    background-size:100%;
+    position: relative;
+}
+
+.hour,
+.minute,
+.second {
+    position: absolute;
+    width: 40%;
+    height: 5px;
+    background: #333;
+    top: 50%;
+  		left:29%;
+    border-radius:5px;
+    transform-origin: 100%;
+}
+
+.second{background-color:red; }
