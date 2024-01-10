@@ -9,10 +9,9 @@ body {
 .clock {
     width: 200px;
     height: 200px;
-    border: 2px solid #333;
-    background:url('imgonlinecomuaCompressToSizeOmNATjUMFKw-300x300.jpg');
+    background: url('imgonlinecomuaCompressToSizeOmNATjUMFKw-300x300.jpg');
     background-repeat: no-repeat;
-    background-size:100%;
+    background-size: 100%;
     position: relative;
 }
 
@@ -21,12 +20,14 @@ body {
 .second {
     position: absolute;
     width: 40%;
-    height: 5px;
+    height: 7px;
     background: #333;
     top: 50%;
-  		left:29%;
-    border-radius:5px;
+    left: 29%;
+    border-radius: 5px;
     transform-origin: 100%;
 }
 
-.second{background-color:red; }
+.second {
+    background-color: red;
+}
