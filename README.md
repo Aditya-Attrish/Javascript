@@ -1,2 +1,1 @@
-# Javascript
-Images search engine
+# 2048 Game using javascript
