@@ -1,9 +1,8 @@
 //Gobal variables
 const scoreDiv = document.getElementById("score");
 const gridContainer = document.getElementById('game-container');
-const restartButton = document.getElementById('restart-button');
 let startX, startY, endX, endY;
-let score = 0, width = 4;
+let score = 0;
 let board = [];
 
 // Random Number generate function
@@ -48,13 +47,11 @@ function restartGame() {
     else{
     	for (let i = 0; i < 16; i++)
     		board[i].innerHTML = "";
-    	let info = document.getElementById("info");
-    	info.classList.remove("active");
     }
     
     gridContainer.addEventListener('touchstart', handleTouchStart);
 	gridContainer.addEventListener('touchend', handleTouchEnd);
-	
+	document.addEventListener("keydown", control);
     score = 0;
     scoreDiv.innerHTML = `Score: ${score}`;
     generate();
@@ -67,7 +64,7 @@ function combine(arr){
 	for (let i = 0; i < arr.length-1; i++) {
 		if (arr[i] === arr[i+1]) {
 			let TotalCombined = parseInt(arr[i]) * 2;
-			arr[i] = `${TotalCombined}`;
+			arr[i] = TotalCombined;
 			arr[i+1] = "";
 			score += TotalCombined;
 			scoreDiv.innerHTML = `Score: ${score}`;
@@ -136,9 +133,9 @@ function rightMove(){
 function upMove(){
 	for (let i = 0; i < 4; i++) {
             let totalOne = board[i].innerHTML
-            let totalTwo = board[i + width].innerHTML
-            let totalThree = board[i + width * 2].innerHTML
-            let totalFour = board[i + width * 3].innerHTML
+            let totalTwo = board[i + 4].innerHTML
+            let totalThree = board[i + 4 * 2].innerHTML
+            let totalFour = board[i + 4 * 3].innerHTML
             let column = [totalOne, totalTwo, totalThree,totalFour]
 
             let filteredColumn = column.filter(num => num)
@@ -154,9 +151,9 @@ function upMove(){
             let newColumn = filteredColumn.concat(empty_string);
 
             board[i].innerHTML = newColumn[0]
-            board[i + width].innerHTML = newColumn[1]
-            board[i + width * 2].innerHTML = newColumn[2]
-            board[i + width * 3].innerHTML = newColumn[3]
+            board[i + 4].innerHTML = newColumn[1]
+            board[i + 4 * 2].innerHTML = newColumn[2]
+            board[i + 4 * 3].innerHTML = newColumn[3]
         }
 	}
 }
@@ -164,9 +161,9 @@ function upMove(){
 function downMove(){
 	for (let i = 0; i < 4; i++) {
             let totalOne = board[i].innerHTML
-            let totalTwo = board[i + width].innerHTML
-            let totalThree = board[i + width * 2].innerHTML
-            let totalFour = board[i + width * 3].innerHTML
+            let totalTwo = board[i + 4].innerHTML
+            let totalThree = board[i + 4 * 2].innerHTML
+            let totalFour = board[i + 4 * 3].innerHTML
             let column = [totalOne, totalTwo, totalThree,totalFour]
 
             let filteredColumn = column.filter(num => num)
@@ -182,9 +179,9 @@ function downMove(){
             let newColumn = empty_string.concat(filteredColumn)
 
             board[i].innerHTML = newColumn[0]
-            board[i + width].innerHTML = newColumn[1]
-            board[i + width * 2].innerHTML = newColumn[2]
-            board[i + width * 3].innerHTML = newColumn[3]
+            board[i + 4].innerHTML = newColumn[1]
+            board[i + 4 * 2].innerHTML = newColumn[2]
+            board[i + 4 * 3].innerHTML = newColumn[3]
         }
     }
 }
@@ -192,11 +189,15 @@ function downMove(){
 function destroay(str){
 	gridContainer.removeEventListener("touchstart", handleTouchStart);
    	gridContainer.removeEventListener("touchend", handleTouchEnd);
+   	document.removeEventListener("keydown", control);
 	let info = document.getElementById("info");
 	info.classList.add("active");
 	let greet = document.getElementById("greet");
    	greet.innerHTML = str;
-   	document.getElementById("restart").onclick = restartGame;
+   	document.getElementById("restart").onclick = ()=>{
+   		info.classList.remove("active");
+   		restartGame();
+   	}
 }
 
 function checkGameOver(){
@@ -215,6 +216,22 @@ function checkForWin() {
         	break;
         }
     }
+}
+
+///assign functions to keys
+function control(e) {
+    if (e.key === "ArrowLeft") {
+        leftMove();
+    } else if (e.key === "ArrowRight") {
+        rightMove();
+    } else if (e.key === "ArrowUp") {
+        upMove();
+    } else if (e.key === "ArrowDown") {
+        downMove();
+    }
+    generate();
+    colors();
+    checkForWin();
 }
 
 //Define screen touch functions
@@ -263,7 +280,6 @@ function handleSwipe() {
 }
 
 // Main 
-restartButton.addEventListener('click', restartGame);
 
 // Start the game
 restartGame();
