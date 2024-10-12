@@ -52,6 +52,7 @@ function restartGame() {
     gridContainer.addEventListener('touchstart', handleTouchStart);
 	gridContainer.addEventListener('touchend', handleTouchEnd);
 	document.addEventListener("keydown", control);
+	
     score = 0;
     scoreDiv.innerHTML = `Score: ${score}`;
     generate();
@@ -257,21 +258,17 @@ function handleSwipe() {
         if (deltaX > 0) {
             // Swipe right
             rightMove();
-           //     console.log('Swipe right');
         } else {
             // Swipe left
-            leftMove();
-            //    console.log('Swipe left');
+    	    leftMove();
         }
     } else {
         if (deltaY > 0) {
-                // Swipe down
-                downMove();
-           // console.log('Swipe down');
+            // Swipe down
+            downMove();
         } else {
-                // Swipe up
-                upMove();
-            //console.log('Swipe up');
+            // Swipe up
+            upMove();
         }
     }
     generate();
