@@ -25,5 +25,4 @@ To run the game locally:
 1. Clone the repository:
 
    ```bash
-   pkg install git
    git clone https://github.com/Aditya-attrish/2048-game.git
